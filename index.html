@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mood Detection — On-Device</title>
+  <meta name="description" content="On-device mood detection in the browser using Human.js (TensorFlow.js). No uploads.">
+  <meta property="og:title" content="Mood Detection — On-Device" />
+  <meta property="og:description" content="Real-time facial emotion detection in the browser. No server required." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="./preview.png" />
+  <meta name="theme-color" content="#0e1327" />
+  <link rel="stylesheet" href="style.css?v=2" />
+  <script defer src="https://unpkg.com/@vladmandic/human/dist/human.js"></script>
+  <script defer src="script.js?v=2"></script>
+</head>
+<body data-theme="dark">
+  <header class="site-header">
+    <h1>🎭 Mood Detection</h1>
+    <p class="subtitle">Runs 100% in your browser. No video leaves your device.</p>
+    <div class="header-actions">
+      <button id="themeToggle" class="ghost" aria-label="Toggle theme">🌗 Theme</button>
+      <a class="ghost" target="_blank" rel="noreferrer" href="https://github.com/">⭐ Star</a>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="card">
+      <div class="media">
+        <video id="video" autoplay muted playsinline aria-label="Camera preview"></video>
+        <canvas id="overlay" aria-hidden="true"></canvas>
+        <div id="moodBadge" class="badge">Mood: —</div>
+      </div>
+
+      <div class="toolbar" role="group" aria-label="Controls">
+        <label class="select-wrap" for="cameraSelect" title="Choose camera">
+          <select id="cameraSelect" aria-label="Camera source"></select>
+        </label>
+        <button id="startBtn" class="primary">▶ Start</button>
+        <button id="stopBtn">⏹ Stop</button>
+        <button id="snapBtn">📸 Snapshot</button>
+        <label class="switch" title="Mirror (selfie) view">
+          <input type="checkbox" id="mirrorToggle" />
+          <span>Mirror</span>
+        </label>
+      </div>
+    </section>
+
+    <aside class="card">
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-label">Top Mood</div>
+          <div class="stat-value" id="topMood">—</div>
+          <div class="bar"><div class="fill" id="topConf" style="width:0%"></div></div>
+        </div>
+        <div class="stat duo">
+          <div>
+            <div class="stat-label">FPS</div>
+            <div class="bar small"><div class="fill" id="fpsBar" style="width:0%"></div></div>
+            <div class="mini" id="fpsText">—</div>
+          </div>
+          <div>
+            <div class="stat-label">Faces</div>
+            <div class="bar small"><div class="fill" id="facesBar" style="width:0%"></div></div>
+            <div class="mini" id="facesText">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="emotions">
+        <h2>Emotions</h2>
+        <div id="emotionList" class="emotion-list">
+          <div class="muted">No face detected.</div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <small>Tip: <kbd>S</kbd> start, <kbd>X</kbd> stop, <kbd>C</kbd> capture, <kbd>M</kbd> mirror, <kbd>T</kbd> theme.</small>
+  </footer>
+</body>
+</html>
